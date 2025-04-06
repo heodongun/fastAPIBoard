@@ -1,4 +1,6 @@
 from typing import List, Optional
+
+import uvicorn
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
@@ -345,3 +347,6 @@ async def update_profile_image(request: UserProfileImageUpdateRequest):
         return UserProfileImageUpdateResponse(code="SU", message="Success.")
     else:
         raise HTTPException(status_code=401, detail={"code": "NU", "message": "This user does not exist."})
+
+if __name__ == '__main__':
+    uvicorn.run(app, host='0.0.0.0', port=8000)
